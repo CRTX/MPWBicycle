@@ -1,6 +1,6 @@
 # Symfony Bicycle Project
 
-There's only a few steps to run this example. I tested it using Linux. Unfortunately I don't have a Mac to test it, so just a heads up.
+There's only a few steps to run this example. I tested it using Linux. Unfortunately I don't have a Mac to test it, so just a heads up. I built this using the latest PHP version so there's a little syntatic sugar here and there.
 
 1. After cloning the repo, you can use `docker compose up` 
 2. Add `127.0.0.1 bicycle.localhost` to `/etc/hosts`
