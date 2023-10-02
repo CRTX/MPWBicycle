@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * However, using composition you can turn logging on and off
  * without injecting the logger class inside the Bicycle class.
  * 
- * This also prevents from having to touch anything inside the Bicycle class and respects it's single responsibility.
+ * This also prevents from having to touch anything inside the Bicycle class and respects its single responsibility.
  * 
  * Plus, since they also use the same interface, they can be interchanged anywhere without breaking code
  * so you're able to switch between logging or no logging with ease.
