@@ -35,13 +35,14 @@ class BicycleController extends AbstractController
     #[Route('/api/bicycleloggingexample', methods: ['GET'])]
     public function bicycleFactoryLoggingExample(
         BicycleRiderFactory $riderFactory,
-        BicycleLogging $bicycleLogging
+        BicycleLogging $bicycle
     ): StreamedJsonResponse
     {
         $rider = $riderFactory->create();
 
         try {
-            $bicycleLogging->transport($rider);
+            //This bicycle logs errors
+            $bicycle->transport($rider);
             $payload = [
                 "success" => true,
                 "message" => "You are successfully riding a bike!",
@@ -70,6 +71,7 @@ class BicycleController extends AbstractController
         $rider = $riderFactory->create();
 
         try {
+            //This bicycle does not log errors
             $bicycle->transport($rider);
             $payload = [
                 "success" => true,
@@ -100,10 +102,10 @@ class BicycleController extends AbstractController
         $rider = new Bicyclist(direction: $direction, steering: $steering);
         $bicycle = new Bicycle();
 
-        $logBicycle = new BicycleLogging(logger: $logger, bicycle: $bicycle);
+        $bicycleLogging = new BicycleLogging(logger: $logger, bicycle: $bicycle);
 
         try {
-            $logBicycle->transport($rider);
+            $bicycleLogging->transport($rider);
             $payload = [
                 "success" => true,
                 "message" => "You are successfully riding a bike!",
