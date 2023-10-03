@@ -4,7 +4,7 @@ There's only a few steps to run this example. I tested it using Linux. Unfortuna
 
 1. After cloning the repo, you can use `docker compose up`
 2. Add `127.0.0.1 bicycle.localhost` to `/etc/hosts` to your host PC.
-3. Visit three working examples:
+3. Visit three working examples. They all basically do the same thing but are implemented differently in the controller code:
     - http://bicycle.localhost:9090/api/bicycleloggingexample?direction=forward&steering=left
     - http://bicycle.localhost:9090/api/bicyclefactoryexample?direction=forward&steering=left
     - http://bicycle.localhost:9090/api/bicycle?direction=forward&steering=left
