@@ -8,7 +8,7 @@ use Exception;
 use Psr\Log\LoggerInterface;
 
 //Logging logic can become complicated at times. We can put as much logging as we need in here
-class BicycleLogger implements BicycleTransportInterface
+class BicycleLogging implements BicycleTransportInterface
 {
     public function __construct(
         private LoggerInterface $logger,

@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use App\Object\Bicycle;
+use App\Object\BicycleRiderFactory;
 use App\Object\Bicyclist;
-use App\Services\BicycleLogger;
+use App\Services\BicycleLogging;
 use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,6 +31,65 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BicycleController extends AbstractController
 {
+
+    #[Route('/api/bicycleloggingexample', methods: ['GET'])]
+    public function bicycleFactoryLoggingExample(
+        BicycleRiderFactory $riderFactory,
+        BicycleLogging $bicycleLogging
+    ): StreamedJsonResponse
+    {
+        $rider = $riderFactory->create();
+
+        try {
+            $bicycleLogging->transport($rider);
+            $payload = [
+                "success" => true,
+                "message" => "You are successfully riding a bike!",
+                "direction" => $rider->getDirection(),
+                "steering" => $rider->getSteering()
+            ];
+            return new StreamedJsonResponse($payload);
+        } catch (Exception $e) {
+            $payload = [
+                "success" => false,
+                "message" => "We don't think you're using the bike quite right. Try again!",
+                "direction" => $rider->getDirection(),
+                "steering" => $rider->getSteering()
+            ];
+            return new StreamedJsonResponse($payload);
+        }
+
+    }
+
+    #[Route('/api/bicyclefactoryexample', methods: ['GET'])]
+    public function bicycleFactoryExample(
+        BicycleRiderFactory $riderFactory,
+        Bicycle $bicycle
+    ): StreamedJsonResponse
+    {
+        $rider = $riderFactory->create();
+
+        try {
+            $bicycle->transport($rider);
+            $payload = [
+                "success" => true,
+                "message" => "You are successfully riding a bike!",
+                "direction" => $rider->getDirection(),
+                "steering" => $rider->getSteering()
+            ];
+            return new StreamedJsonResponse($payload);
+        } catch (Exception $e) {
+            $payload = [
+                "success" => false,
+                "message" => "We don't think you're using the bike quite right. Try again!",
+                "direction" => $rider->getDirection(),
+                "steering" => $rider->getSteering()
+            ];
+            return new StreamedJsonResponse($payload);
+        }
+
+    }
+
     #[Route('/api/bicycle', methods: ['GET'])]
     public function index(Request $request, LoggerInterface $logger): StreamedJsonResponse 
     {
@@ -39,7 +99,7 @@ class BicycleController extends AbstractController
         $rider = new Bicyclist(direction: $direction, steering: $steering);
         $bicycle = new Bicycle();
 
-        $logBicycle = new BicycleLogger(logger: $logger, bicycle: $bicycle);
+        $logBicycle = new BicycleLogging(logger: $logger, bicycle: $bicycle);
 
         try {
             $logBicycle->transport($rider);
