@@ -2,9 +2,10 @@
 
 There's only a few steps to run this example. I tested it using Linux. Unfortunately I don't have a Mac to test it, so just a heads up. I built this using the latest PHP version so there's a little syntatic sugar here and there.
 
-1. After cloning the repo, you can use `docker compose up` 
-2. Add `127.0.0.1 bicycle.localhost` to `/etc/hosts`
-3. Visit http://bicycle.localhost:9090/api/bicycle?direction=forward&steering=left
+1. After cloning the repo, you can use `docker compose up`
+2. In the project folder run `docker compose exec -it php bash`. Then run `cd ./bicycle && composer install`. Lastly, you can type `exit`.
+3. Add `127.0.0.1 bicycle.localhost` to `/etc/hosts` to your host PC.
+4. Visit http://bicycle.localhost:9090/api/bicycle?direction=forward&steering=left
 
 Valid values for `steering` in the url is `right`, `left`, `straight`
 
