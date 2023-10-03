@@ -90,6 +90,7 @@ class BicycleController extends AbstractController
 
     }
 
+    //This is an example of manually wiring everything without using autowire or factories
     #[Route('/api/bicycle', methods: ['GET'])]
     public function index(Request $request, LoggerInterface $logger): StreamedJsonResponse 
     {
