@@ -26,6 +26,15 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
+  composer_installation:
+    container_name: composer_installation
+    image: composer
+    volumes:
+        - ./server:/home/app/server
+    working_dir: /home/app/server/bicycle
+    command: composer install
+
+
   traefik:
     image: "traefik:latest"
     container_name: "traefik"
